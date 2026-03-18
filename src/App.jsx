@@ -1,4 +1,5 @@
 import { useState } from "react";
+import axios from "axios";
 
 function App() {
   const [formData, setFormData] = useState({
@@ -10,7 +11,12 @@ function App() {
 
   function handlerSubmit(e) {
     e.preventDefault();
-  }
+    console.log(formData);
+    axios.post("https://67c5b4f3351c081993fb1ab6.mockapi.io/api/posts", formData)
+    .then(res =>{
+      console.log(res.data);
+    })
+  };
 
   function handlerFormData(e) {
     const value =
@@ -20,8 +26,6 @@ function App() {
       [e.target.name]: value,
     });
   }
-
-  console.log(formData);
 
   return (
     <>
