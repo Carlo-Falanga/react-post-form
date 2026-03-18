@@ -2,10 +2,10 @@ import { useState } from "react";
 
 function App() {
   const [formData, setFormData] = useState({
-    name: '',
-    title: '',
-    textBody: '',
-    status: '',
+    author: "",
+    title: "",
+    body: "",
+    public: false,
   });
 
   function handlerSubmit(e) {
@@ -13,7 +13,8 @@ function App() {
   }
 
   function handlerFormData(e) {
-    const value = e.target.type === 'checkbox' ? e.target.checked : e.target.value;
+    const value =
+      e.target.type === "checkbox" ? e.target.checked : e.target.value;
     setFormData({
       ...formData,
       [e.target.name]: value,
@@ -21,8 +22,6 @@ function App() {
   }
 
   console.log(formData);
-  
-  
 
   return (
     <>
@@ -35,9 +34,9 @@ function App() {
               <input
                 type="text"
                 className="form-control"
-                id="name"
-                name= 'name'
-                value={formData.name}
+                id="author"
+                name="author"
+                value={formData.author}
                 onChange={handlerFormData}
               />
             </div>
@@ -50,7 +49,7 @@ function App() {
                 type="text"
                 className="form-control"
                 id="title"
-                name='title'
+                name="title"
                 value={formData.title}
                 onChange={handlerFormData}
               />
@@ -66,9 +65,9 @@ function App() {
             <div className="col-sm-10">
               <textarea
                 className="form-control"
-                id="textBody"
-                name= 'textBody'
-                value={formData.textBody}
+                id="body"
+                name="body"
+                value={formData.body}
                 rows="5"
                 onChange={handlerFormData}
               ></textarea>
@@ -82,26 +81,14 @@ function App() {
               <div className="form-check">
                 <input
                   className="form-check-input"
-                  type="radio"
-                  name="status"
+                  type="checkbox"
+                  name="public"
                   id="public"
                   value="public"
-                  checked= {formData.status === 'public'}
+                  checked={formData.public}
                   onChange={handlerFormData}
                 />
                 <label className="form-check-label">Public</label>
-              </div>
-              <div className="form-check">
-                <input
-                  className="form-check-input"
-                  type="radio"
-                  name="status"
-                  id="draft"
-                  value="draft"
-                  checked={formData.status === 'draft'}
-                  onChange={handlerFormData}
-                />
-                <label className="form-check-label">Draft</label>
               </div>
             </div>
           </fieldset>
