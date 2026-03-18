@@ -2,19 +2,32 @@ import { useState } from "react";
 
 function App() {
   const [formData, setFormData] = useState({
-    name: "",
-    title: "",
-    textBody: "",
-    status: "",
+    name: '',
+    title: '',
+    textBody: '',
+    status: '',
   });
 
+  function handlerSubmit(e) {
+    e.preventDefault();
+  }
+
+  function handlerFormData(e) {
+    const value = e.target.type === 'checkbox' ? e.target.checked : e.target.value;
+    setFormData({
+      ...formData,
+      [e.target.name]: value,
+    });
+  }
+
   console.log(formData);
+  
   
 
   return (
     <>
       <section className="container">
-        <form className="mt-5">
+        <form className="mt-5" onSubmit={handlerSubmit}>
           {/* Name imput */}
           <div className="row mb-3">
             <label className="col-sm-2 col-form-label">Author Name</label>
@@ -23,7 +36,9 @@ function App() {
                 type="text"
                 className="form-control"
                 id="name"
-                name="name"
+                name= 'name'
+                value={formData.name}
+                onChange={handlerFormData}
               />
             </div>
           </div>
@@ -35,21 +50,27 @@ function App() {
                 type="text"
                 className="form-control"
                 id="title"
-                name="title"
+                name='title'
+                value={formData.title}
+                onChange={handlerFormData}
               />
             </div>
           </div>
 
           {/* Text body imput */}
           <div className="row mb-3">
-            <label className="form-label col-sm-2 col-form-label">Text body</label>
+            <label className="form-label col-sm-2 col-form-label">
+              Text body
+            </label>
 
             <div className="col-sm-10">
               <textarea
                 className="form-control"
                 id="textBody"
-                name="textBody"
-                rows="3"
+                name= 'textBody'
+                value={formData.textBody}
+                rows="5"
+                onChange={handlerFormData}
               ></textarea>
             </div>
           </div>
@@ -65,6 +86,8 @@ function App() {
                   name="status"
                   id="public"
                   value="public"
+                  checked= {formData.status === 'public'}
+                  onChange={handlerFormData}
                 />
                 <label className="form-check-label">Public</label>
               </div>
@@ -75,6 +98,8 @@ function App() {
                   name="status"
                   id="draft"
                   value="draft"
+                  checked={formData.status === 'draft'}
+                  onChange={handlerFormData}
                 />
                 <label className="form-check-label">Draft</label>
               </div>
