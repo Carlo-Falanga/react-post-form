@@ -12,11 +12,18 @@ function App() {
   function handlerSubmit(e) {
     e.preventDefault();
     console.log(formData);
-    axios.post("https://67c5b4f3351c081993fb1ab6.mockapi.io/api/posts", formData)
-    .then(res =>{
-      console.log(res.data);
-    })
-  };
+    axios
+      .post("https://67c5b4f3351c081993fb1ab6.mockapi.io/api/posts", formData)
+      .then((res) => {
+        console.log(res.data);
+        setFormData({
+          author: "",
+          title: "",
+          body: "",
+          public: false,
+        });
+      });
+  }
 
   function handlerFormData(e) {
     const value =
